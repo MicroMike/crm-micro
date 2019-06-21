@@ -10,7 +10,11 @@
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
     "redux-form": "^8.2.4",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.19.1",
+    "redux-logger": "^3.0.6",
+    "shelljs": "^0.8.3"
   },
   "scripts": {
     "push": "git add . && git commit -m c && git push",
@@ -21,7 +25,13 @@
   },
   "temp": {
     "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "devDependencies": {
+      "concurrently": "^4.1.0",
+      "nodemon": "^1.19.1",
+      "redux-logger": "^3.0.6",
+      "shelljs": "^0.8.3"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,11 +47,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^4.1.0",
-    "nodemon": "^1.19.1",
-    "redux-logger": "^3.0.6",
-    "shelljs": "^0.8.3"
   }
 }
