@@ -17,8 +17,10 @@
     "start:web": "react-scripts start",
     "start:dev": "concurrently \"npm run start:web\" \"nodemon server/index\"",
     "start": "node run",
+    "test": "react-scripts test"
+  },
+  "temp": {
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
