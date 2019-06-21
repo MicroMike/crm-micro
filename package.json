@@ -16,7 +16,7 @@
     "push": "git add . && git commit -m c && git push",
     "start:web": "react-scripts start",
     "start:dev": "concurrently \"npm run start:web\" \"nodemon server/index\"",
-    "start": "concurrently \"npm run start:web\" \"node server/index\"",
+    "start": "node run",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -39,6 +39,7 @@
   "devDependencies": {
     "concurrently": "^4.1.0",
     "nodemon": "^1.19.1",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "shelljs": "^0.8.3"
   }
 }
