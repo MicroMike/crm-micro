@@ -28,7 +28,7 @@ const handler = (req, res) => {
   if (req.method === 'POST') {
     const { path, formData } = req.body;
 
-    switch (url) {
+    switch (req.url) {
       case '/api/postModel':
         const M = parseModel(path)
         const entry = new M(formData)
