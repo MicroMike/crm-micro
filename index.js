@@ -16,9 +16,18 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://heroku_p2h3kjzg:1l3nvjb34
   }
 });
 
+
 const handler = (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  const send = (data, err = false) => {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    }
+
+    res.writeHead(err ? 500 : 200, headers)
+    res.end(JSON.stringify({ data }))
+  }
 
   if (req.method === 'POST') {
     const { path, formData } = req.body
@@ -28,13 +37,9 @@ const handler = (req, res) => {
         const M = parseModel(path)
         const entry = new M(formData)
 
-        entry.save((err, savedEntry) => {
-          console.log(err)
-          res.writeHead(err ? 500 : 200)
-          res.end(JSON.stringify({ savedEntry }))
-        })
+        entry.save((err, savedEntry) => send(res, savedEntry, err))
       default:
-        res.end(JSON.stringify({ url: req.url, body: req.body }))
+        send({ url: req.url, body: req.body })
     }
   }
   else {
