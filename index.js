@@ -50,6 +50,9 @@ const handler = (req, res) => {
     });
   }
   else {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.sendFile(path.join(__dirname + '/client/build/index.html'))
+
     params = req.url.split('?')[1]
 
     switch (url) {
@@ -57,7 +60,6 @@ const handler = (req, res) => {
         res.end(JSON.stringify({ index: true }));
     }
   }
-
 }
 
 // io.on('connection', client => {
@@ -72,15 +74,9 @@ const path = require('path');
 const app = express();
 
 // Put all API endpoints under '/api'
-app.get('/api/*', handler);
+app.get('*', handler);
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, 'client/build')))
-
-// Anything that doesn't match the above, send back index.html
-app.get('*', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.sendFile(path.join(__dirname + '/client/build/index.html'))
-})
 
 app.listen(process.env.PORT || 5000);
