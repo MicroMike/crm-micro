@@ -30,9 +30,11 @@ const handler = (req, res) => {
 
   if (req.method === 'POST') {
     params = '';
+
     req.on('data', chunk => {
       params += chunk.toString(); // convert Buffer to string
     });
+
     req.on('end', () => {
       params = JSON.parse(params)
 
@@ -45,7 +47,7 @@ const handler = (req, res) => {
             send(res, err || ok, true)
           })
         default:
-          res.end(JSON.stringify({ params, url }))
+          res.end(JSON.stringify({ params, url, body: req.body }))
       }
     });
   }
