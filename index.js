@@ -26,7 +26,8 @@ const handler = (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   if (req.method === 'POST') {
-    const { path, formData } = req.body;
+    const { path, formData } = req.body
+    console.log(req.body)
 
     switch (req.baseUrl) {
       case '/api/postModel':
@@ -41,9 +42,7 @@ const handler = (req, res) => {
     }
   }
   else {
-    let params = req.url.split('?')[1]
-
-    switch (url) {
+    switch (req.url) {
       case '/':
         res.end(JSON.stringify({ index: true }));
     }
