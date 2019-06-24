@@ -18,7 +18,6 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://heroku_p2h3kjzg:1l3nvjb34
 
 
 const handler = (req, res) => {
-
   const send = (data, err = false) => {
     const headers = {
       'Content-Type': 'application/json',
