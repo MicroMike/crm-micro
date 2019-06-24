@@ -22,13 +22,13 @@ const send = (res, response, err) => {
 }
 
 const handler = (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   const url = req.url.split('?')[0]
   let params
 
   if (req.method === 'POST') {
-    res.setHeader('Content-Type', 'application/json');
     params = '';
     req.on('data', chunk => {
       params += chunk.toString(); // convert Buffer to string
@@ -57,6 +57,7 @@ const handler = (req, res) => {
         res.end(JSON.stringify({ index: true }));
     }
   }
+
 }
 
 // io.on('connection', client => {
@@ -71,7 +72,7 @@ const path = require('path');
 const app = express();
 
 // Put all API endpoints under '/api'
-app.get('/api/*', handler);
+app.use('/api/*', handler);
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, 'client/build')))
