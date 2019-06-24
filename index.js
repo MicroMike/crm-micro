@@ -26,7 +26,11 @@ const handler = (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   if (req.method === 'POST') {
-    console.log(req.body)
+    console.log({
+      body: req.body,
+      params: req.params,
+      query: req.query,
+    })
     const { path, formData } = req.body
 
     switch (req.baseUrl) {
