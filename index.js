@@ -1,17 +1,13 @@
 const mongoose = require('mongoose')
-let fs = require('fs');
 const Models = require('./client/src/models/models')
 
-const parseModel = (name) => {
+const M = {}
+Object.keys(Models).forEach(k => {
   const a = {}
-  const model = Models[name]
+  const model = Models[k]
   const schema = Object.keys(model).map(k => a[k] = model[k].mongoDB || model[k])
-  const newSchema = new mongoose.Schema(schema)
-  return schema && mongoose.model(name, newSchema)
-}
-
-const M = []
-Object.keys(Models).forEach(k => M.push(parseModel(k)))
+  M[K] = mongoose.model(k, new mongoose.Schema(schema))
+})
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://heroku_p2h3kjzg:1l3nvjb34h67feigdavvuof03g@ds239797.mlab.com:39797/heroku_p2h3kjzg', (error) => {
