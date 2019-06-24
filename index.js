@@ -6,7 +6,7 @@ Object.keys(Models).forEach(k => {
   const a = {}
   const model = Models[k]
   const schema = Object.keys(model).map(k => a[k] = model[k].mongoDB || model[k])
-  M[K] = mongoose.model(k, new mongoose.Schema(schema))
+  M[k] = mongoose.model(k, new mongoose.Schema(schema))
 })
 
 // MongoDB Connection
