@@ -10,6 +10,9 @@ const parseModel = (name) => {
   return schema && mongoose.model(name, newSchema)
 }
 
+const M = []
+Object.keys(Models).forEach(k => M.push(parseModel(k)))
+
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://heroku_p2h3kjzg:1l3nvjb34h67feigdavvuof03g@ds239797.mlab.com:39797/heroku_p2h3kjzg', (error) => {
   if (error) {
@@ -33,8 +36,8 @@ const handler = (req, res) => {
 
     switch (req.baseUrl) {
       case '/api/postModel':
-        const M = parseModel(path)
-        const entry = new M(formData)
+        const model = M[path]
+        const entry = new model(formData)
 
         entry.save((err, savedEntry) => send(savedEntry, err))
       default:
