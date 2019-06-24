@@ -29,27 +29,19 @@ const handler = (req, res) => {
   let params
 
   if (req.method === 'POST') {
-    params = '';
+    const { path, formData } = req.body;
 
-    req.on('data', chunk => {
-      params += chunk.toString(); // convert Buffer to string
-    });
+    switch (url) {
+      case '/api/postModel':
+        const M = parseModel(path)
+        const entry = new M(formData)
 
-    req.on('end', () => {
-      params = JSON.parse(params)
-
-      switch (url) {
-        case '/postModel':
-          const M = parseModel(params.path)
-          const entry = new M(params.formData)
-
-          entry.save((err, ok) => {
-            send(res, err || ok, true)
-          })
-        default:
-          res.end(JSON.stringify({ params, url, body: req.body }))
-      }
-    });
+        entry.save((err, ok) => {
+          send(res, err || ok, true)
+        })
+      default:
+        res.end(JSON.stringify({ url, body: req.body }))
+    }
   }
   else {
     params = req.url.split('?')[1]
@@ -68,6 +60,10 @@ const handler = (req, res) => {
 const express = require('express');
 const path = require('path');
 const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 // Put all API endpoints under '/api'
 app.use('/api/*', handler);

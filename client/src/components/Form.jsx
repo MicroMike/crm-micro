@@ -4,7 +4,6 @@ import customs from 'components/form/_customs'
 
 const onSubmit = async (formData, path) => {
   const response = await fetch('/api/postModel', {
-    headers: new Headers({ 'content-type': 'application/x-www-form-urlencoded' }),
     method: 'POST',
     body: JSON.stringify({ path, formData })
   })
