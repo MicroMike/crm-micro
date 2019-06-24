@@ -5,8 +5,8 @@ const M = {}
 Object.keys(Models).forEach(k => {
   const a = {}
   const model = Models[k]
-  const schema = Object.keys(model).map(k => a[k] = model[k].mongoDB || model[k])
-  M[k] = mongoose.model(k, new mongoose.Schema(schema))
+  Object.keys(model).map(k => a[k] = model[k].mongoDB || model[k])
+  M[k] = mongoose.model(k, new mongoose.Schema(a))
 })
 
 // MongoDB Connection
@@ -17,16 +17,6 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://heroku_p2h3kjzg:1l3nvjb34
 });
 
 const handler = (req, res) => {
-  const send = (data, err = false) => {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    }
-
-    // res.writeHead(err ? 500 : 200, headers)
-    res.end(JSON.stringify({ data }))
-  }
-
   if (req.method === 'POST') {
     const { path, formData } = req.body
 
@@ -34,9 +24,7 @@ const handler = (req, res) => {
       case '/api/postModel':
         const model = M[path]
         const entry = new model(formData)
-        console.log(entry)
-
-        entry.save((err, savedEntry) => send(savedEntry, err))
+        entry.save((err, savedData) => { res.end(JSON.stringify({ savedData })) })
       default:
         send({ url: req.url, body: req.body })
     }
