@@ -37,7 +37,7 @@ const handler = (req, res) => {
         const M = parseModel(path)
         const entry = new M(formData)
 
-        entry.save((err, savedEntry) => send(res, savedEntry, err))
+        entry.save((err, savedEntry) => send(savedEntry, err))
       default:
         send({ url: req.url, body: req.body })
     }
