@@ -16,9 +16,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://heroku_p2h3kjzg:1l3nvjb34
   }
 });
 
-const send = (res, response, err) => {
+const send = (err, entry) => {
   res.writeHead((err && 500) || 200);
-  res.end(JSON.stringify({ response }))
+  return entry
 }
 
 const handler = (req, res) => {
@@ -33,9 +33,8 @@ const handler = (req, res) => {
         const M = parseModel(path)
         const entry = new M(formData)
 
-        entry.save((err, ok) => {
-          send(res, err || ok, true)
-        })
+        const savedEntry = entry.save(send)
+        res.end(JSON.stringify({ savedEntry }))
       default:
         res.end(JSON.stringify({ url: req.url, body: req.body }))
     }
