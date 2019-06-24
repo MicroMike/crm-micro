@@ -6,7 +6,8 @@ const parseModel = (name) => {
   const a = {}
   const model = Models[name]
   const schema = Object.keys(model).map(k => a[k] = model[k].mongoDB || model[k])
-  return schema && mongoose.model(name, new mongoose.Schema(schema))
+  const newSchema = new mongoose.Schema(schema)
+  return schema && mongoose.model(name, newSchema)
 }
 
 // MongoDB Connection
@@ -15,7 +16,6 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://heroku_p2h3kjzg:1l3nvjb34
     console.error('Please make sure Mongodb is installed and running!', error); // eslint-disable-line no-console
   }
 });
-
 
 const handler = (req, res) => {
   const send = (data, err = false) => {
