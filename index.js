@@ -10,11 +10,11 @@ const parseModel = (name) => {
 }
 
 // MongoDB Connection
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://heroku_p2h3kjzg:1l3nvjb34h67feigdavvuof03g@ds239797.mlab.com:39797/heroku_p2h3kjzg', (error) => {
-//   if (error) {
-//     console.error('Please make sure Mongodb is installed and running!', error); // eslint-disable-line no-console
-//   }
-// });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://heroku_p2h3kjzg:1l3nvjb34h67feigdavvuof03g@ds239797.mlab.com:39797/heroku_p2h3kjzg', (error) => {
+  if (error) {
+    console.error('Please make sure Mongodb is installed and running!', error); // eslint-disable-line no-console
+  }
+});
 
 const send = (res, response, err) => {
   res.writeHead((err && 500) || 200);
@@ -57,15 +57,11 @@ const handler = (req, res) => {
         res.end(JSON.stringify({ index: true }));
     }
   }
-
 }
 
 // io.on('connection', client => {
 //   client.emit('activate', client.id)
 // })
-
-// var app = require('http').createServer(handler)
-// app.listen(process.env.BACK_PORT || 3001);
 
 const express = require('express');
 const path = require('path');
