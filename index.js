@@ -53,12 +53,12 @@ const handler = (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.sendFile(path.join(__dirname + '/client/build/index.html'))
 
-    params = req.url.split('?')[1]
+    // params = req.url.split('?')[1]
 
-    switch (url) {
-      case '/':
-        res.end(JSON.stringify({ index: true }));
-    }
+    // switch (url) {
+    //   case '/':
+    //     res.end(JSON.stringify({ index: true }));
+    // }
   }
 }
 
