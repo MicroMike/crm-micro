@@ -26,12 +26,8 @@ const handler = (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   if (req.method === 'POST') {
-    console.log({
-      body: req.body,
-      params: req.params,
-      query: req.query,
-    })
-    const { path, formData } = req.body
+    console.log(JSON.parse(req.body))
+    const { path, formData } = JSON.parse(req.body)
 
     switch (req.baseUrl) {
       case '/api/postModel':

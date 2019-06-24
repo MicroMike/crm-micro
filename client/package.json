@@ -13,9 +13,7 @@
     "redux-logger": "^3.0.6"
   },
   "scripts": {
-    "start:web": "react-scripts start",
-    "start:server": "node server/index",
-    "start:dev": "concurrently \"cd client && npm run start\" \"nodemon index\"",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test"
