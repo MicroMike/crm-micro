@@ -11,7 +11,7 @@ const parseModel = (model = {}) => {
 
   Object.keys(model).forEach(k => {
     const value = model[k]
-
+    console.log(value)
     parsedForm.push({
       ...value,
       name: k,
