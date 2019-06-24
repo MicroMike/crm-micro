@@ -25,9 +25,6 @@ const handler = (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
 
-  const url = req.url.split('?')[0]
-  let params
-
   if (req.method === 'POST') {
     const { path, formData } = req.body;
 
@@ -40,11 +37,11 @@ const handler = (req, res) => {
           send(res, err || ok, true)
         })
       default:
-        res.end(JSON.stringify({ url, body: req.body }))
+        res.end(JSON.stringify({ url: req.url, body: req.body }))
     }
   }
   else {
-    params = req.url.split('?')[1]
+    let params = req.url.split('?')[1]
 
     switch (url) {
       case '/':
