@@ -27,12 +27,7 @@ const handler = (req, res) => {
 
   if (req.method === 'POST') {
     const { path, formData } = req.body;
-    console.log({
-      url: req.url,
-      baseUrl: req.baseUrl,
-      originalUrl: req.originalUrl,
-      _parsedUrl: req._parsedUrl,
-    })
+    console.log(req.body)
     switch (req.baseUrl) {
       case '/api/postModel':
         const M = parseModel(path)
@@ -46,9 +41,7 @@ const handler = (req, res) => {
     }
   }
   else {
-    let params = req.url.split('?')[1]
-
-    switch (url) {
+    switch (req.url) {
       case '/':
         res.end(JSON.stringify({ index: true }));
     }
