@@ -33,8 +33,8 @@ const handler = (req, res) => {
     switch (req.baseUrl) {
       case '/api/postModel':
         const model = M[path]
-        console.log(model)
         const entry = new model(formData)
+        console.log(entry)
 
         entry.save((err, savedEntry) => send(savedEntry, err))
       default:
