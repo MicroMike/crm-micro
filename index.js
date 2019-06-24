@@ -37,7 +37,7 @@ const handler = (req, res) => {
           send(res, err || ok, true)
         })
       default:
-        res.end(JSON.stringify({ req, body: req.body }))
+        res.end(JSON.stringify({ url: Object.keys(req), body: req.body }))
     }
   }
   else {
