@@ -27,7 +27,12 @@ const handler = (req, res) => {
 
   if (req.method === 'POST') {
     const { path, formData } = req.body;
-
+    console.log({
+      url: req.url,
+      baseUrl: req.baseUrl,
+      originalUrl: req.originalUrl,
+      _parsedUrl: req._parsedUrl,
+    })
     switch (req.baseUrl) {
       case '/api/postModel':
         const M = parseModel(path)
@@ -37,7 +42,7 @@ const handler = (req, res) => {
           send(res, err || ok, true)
         })
       default:
-        res.end(JSON.stringify({ url: Object.values(req), body: req.body }))
+        res.end(JSON.stringify({ body: req.body }))
     }
   }
   else {
