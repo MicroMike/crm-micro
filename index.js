@@ -24,7 +24,7 @@ const handler = (req, res) => {
       'Access-Control-Allow-Origin': '*'
     }
 
-    res.writeHead(err ? 500 : 200, headers)
+    // res.writeHead(err ? 500 : 200, headers)
     res.end(JSON.stringify({ data }))
   }
 
