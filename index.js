@@ -72,12 +72,14 @@ const path = require('path');
 const app = express();
 
 // Put all API endpoints under '/api'
-app.get('/api/postModel', handler);
+app.get('/api/*', handler);
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, 'client/build')))
+
 // Anything that doesn't match the above, send back index.html
 app.get('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.sendFile(path.join(__dirname + '/client/build/index.html'))
 })
 
