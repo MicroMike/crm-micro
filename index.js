@@ -24,9 +24,9 @@ const handler = (req, res) => {
       case '/api/postModel':
         const model = M[path]
         const entry = new model(formData)
-        entry.save((err, savedData) => { res.end(JSON.stringify({ savedData })) })
+        entry.save((err, savedData) => res.end(JSON.stringify({ savedData })))
       default:
-        send({ url: req.url, body: req.body })
+        res.end(JSON.stringify({ url: req.url, body: req.body }))
     }
   }
   else {
